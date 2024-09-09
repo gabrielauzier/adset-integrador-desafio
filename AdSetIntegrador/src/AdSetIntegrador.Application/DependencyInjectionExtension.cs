@@ -1,4 +1,4 @@
-﻿using AdSetIntegrador.Application.UseCases.Vehicle.Register;
+﻿using AdSetIntegrador.Application.UseCases.Vehicles.Register;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AdSetIntegrador.Application;

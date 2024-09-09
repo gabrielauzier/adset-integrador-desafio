@@ -1,7 +1,7 @@
 ﻿using AdSetIntegrador.Communication.Requests;
 using AdSetIntegrador.Communication.Responses;
 
-namespace AdSetIntegrador.Application.UseCases.Vehicle.Register;
+namespace AdSetIntegrador.Application.UseCases.Vehicles.Register;
 
 public interface IRegisterVehicleUseCase
 {
