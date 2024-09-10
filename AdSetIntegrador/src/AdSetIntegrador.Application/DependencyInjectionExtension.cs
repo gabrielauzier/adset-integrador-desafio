@@ -1,4 +1,6 @@
-﻿using AdSetIntegrador.Application.UseCases.Vehicles.Register;
+﻿using AdSetIntegrador.Application.UseCases.Vehicles.Delete;
+using AdSetIntegrador.Application.UseCases.Vehicles.List;
+using AdSetIntegrador.Application.UseCases.Vehicles.Register;
 using AdSetIntegrador.Application.UseCases.Vehicles.Update;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,5 +12,7 @@ public static class DependencyInjectionExtension
     {
         services.AddScoped<IRegisterVehicleUseCase, RegisterVehicleUseCase>();
         services.AddScoped<IUpdateVehicleUseCase, UpdateVehicleUseCase>();
+        services.AddScoped<IDeleteVehicleUseCase, DeleteVehicleUseCase>();
+        services.AddScoped<IListVehiclesUseCase, ListVehiclesUseCase>();
     }
 }

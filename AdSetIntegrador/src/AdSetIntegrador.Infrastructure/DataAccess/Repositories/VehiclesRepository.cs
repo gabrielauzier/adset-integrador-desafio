@@ -19,13 +19,24 @@ internal class VehiclesRepository : IVehiclesRepository
         _dbContext.SaveChanges();
     }
 
-    public Vehicle? GetById(int vehicleId)
+    public void Delete(Vehicle vehicle)
     {
-        return _dbContext.Vehicles.FirstOrDefault(v => v.Id == vehicleId);
+        _dbContext.Vehicles.Remove(vehicle);
+        _dbContext.SaveChanges();
     }
 
     public void Save()
     {
         _dbContext.SaveChanges();
+    }
+
+    public Vehicle? GetById(int vehicleId)
+    {
+        return _dbContext.Vehicles.FirstOrDefault(v => v.Id == vehicleId);
+    }
+
+    public List<Vehicle> List()
+    {
+        return _dbContext.Vehicles.ToList();
     }
 }

@@ -33,7 +33,7 @@ public class ExceptionFilter : IExceptionFilter
             var errorResponse = new ResponseErrorJson(ex2.Error);
 
             context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-            context.Result = new BadRequestObjectResult(errorResponse);
+            context.Result = new NotFoundObjectResult(errorResponse);
         }
         else
         {
