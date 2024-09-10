@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AdSetIntegrador.Communication\AdSetIntegrador.Communication.csproj" />
     <ProjectReference Include="..\AdSetIntegrador.Domain\AdSetIntegrador.Domain.csproj" />
+    <ProjectReference Include="..\AdSetIntegrador.Exception\AdSetIntegrador.Exception.csproj" />
   </ItemGroup>
 
 </Project>
