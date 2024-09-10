@@ -28,6 +28,13 @@ public class ExceptionFilter : IExceptionFilter
             context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             context.Result = new BadRequestObjectResult(errorResponse);
         }
+        else if (context.Exception is ResourceNotFoundException ex2)
+        {
+            var errorResponse = new ResponseErrorJson(ex2.Error);
+
+            context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+            context.Result = new BadRequestObjectResult(errorResponse);
+        }
         else
         {
             var errorResponse = new ResponseErrorJson(context.Exception.Message);

@@ -115,6 +115,15 @@ namespace AdSetIntegrador.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The id for vehicle is required. .
+        /// </summary>
+        public static string VEHICLE_ID_REQUIRED {
+            get {
+                return ResourceManager.GetString("VEHICLE_ID_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The year must be between 2000 and 2024, including..
         /// </summary>
         public static string YEAR_RANGE_INVALID {

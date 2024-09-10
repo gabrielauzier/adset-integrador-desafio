@@ -141,4 +141,7 @@
   <data name="PRICE_INVALID" xml:space="preserve">
     <value>The price must be greater than zero. </value>
   </data>
+  <data name="VEHICLE_ID_REQUIRED" xml:space="preserve">
+    <value>The id for vehicle is required. </value>
+  </data>
 </root>
