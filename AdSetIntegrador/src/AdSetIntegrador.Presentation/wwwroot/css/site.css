@@ -1,0 +1,153 @@
+/* Start Css Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/* End Css Reset */
+
+html {
+    font-size: 0.875rem;
+    font-family: Tagoma, Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 3.75rem;
+}
+
+:root {
+    --hue: 245;
+    --overview-font: #87888A;
+    --overview-blue: #0B72B5;
+    --overview-green: #41A62A;
+    --overview-red: #E2001A;
+    --overview-divider: #C6C7C8;
+}
+
+#vehicles-header-container {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    max-width: 60rem;
+}
+
+/* --------------------------- Vehicles Overview --------------------------- */
+.vehicles-overview {
+    display: flex;
+    gap: 1.125rem;
+    text-align: center;
+    padding: 0 1rem;
+    align-items: center;
+}
+
+.vehicles-overview p {
+    font-size: 0.9375rem; /* 15px */
+    color: var(--overview-font);
+}
+
+.vehicles-overview span {
+    font-size: 0.8125rem; /* 13px */
+}
+
+#overview-span-total {
+    color: var(--overview-blue);
+}
+
+#overview-span-with-images {
+    color: var(--overview-green);
+}
+
+#overview-span-no-images {
+    color: var(--overview-red);
+}
+
+.img-slash {
+    height: 32px;
+}
+
+.overview-divider {
+    display: flex;
+    background-color: var(--overview-divider);
+    height:32px;
+    width: 1px;
+    transform: rotate(-158deg);
+}
+
+/* --------------------------- Vehicles Header Container --------------------------- */
+#vehicles-header-container {
+    display: flex;
+}
+
+/* --------------------------- Vehicles Stock --------------------------- */
+.vehicles-stock {
+    border-left: 1px solid var(--overview-divider);
+    border-right: 1px solid var(--overview-divider);
+    padding: 0.25rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.vehicles-stock p {
+    font-size: 0.8125rem; /* 13px */
+    color: var(--overview-font);
+}
+
+/* --------------------------- Vehicles Register Link --------------------------- */
+.vehicle-register-link {
+    margin-left: 0.875rem;
+}

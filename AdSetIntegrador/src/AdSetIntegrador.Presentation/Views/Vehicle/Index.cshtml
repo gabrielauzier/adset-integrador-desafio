@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Consuta de Veículos";
+}
+
+<div>
+    <!-- Vehicles Overview + Stock + Register Link + Save Btn -->
+    <div id="vehicles-header-container">
+
+        <!-- Vehicles Overview -->
+        <div class="vehicles-overview">
+
+            <!-- Vehicle Overview Item (total) -->
+            <div class="vehicles-overview-item">
+                <p>100 veículos</p>
+                <span id="overview-span-total">Total</span>
+            </div>
+
+            <div class="overview-divider" ></div>
+
+            <!-- Vehicle Overview Item (with pics) -->
+            <div class="vehicles-overview-item">
+                <p>080 veículos</p>
+                <span id="overview-span-with-images">com fotos</span>
+            </div>
+
+            <div class="overview-divider"></div>
+
+            <!-- Vehicle Overview Item (no pics) -->
+            <div class="vehicles-overview-item">
+                <p>030 veículos</p>
+                <span id="overview-span-no-images">Total</span>
+            </div>
+        </div>
+
+        <!-- Vehicles Stock -->
+        <div class="vehicles-stock">
+            <p>Exportar Estoque</p>
+            <img src="~/images/excel-export.png" />
+        </div>
+       
+        <!-- Vehicles Register Link -->
+        <div class="vehicle-register-link">
+            <a>
+                <img src="~/images/vehicle-register-link.png" />
+            </a>
+        </div>
+
+        <!-- Vehicles Save Btn -->
+        <div style="align-self: end; justify-self: end; margin-left: auto;">
+            <img src="~/images/save-btn.png" />
+        </div>
+    </div>
+
+    <!-- Vehicles Filter -->
+    <div id="vehicles-filter-container"></div>
+
+    <!-- Vehicles List Header -->
+    <div id="vehicles-list-header-container"></div>
+
+    <!-- Vehicles List -->
+    <div id="vehicles-list-container"></div>
+</div>

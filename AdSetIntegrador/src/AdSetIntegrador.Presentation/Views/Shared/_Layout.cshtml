@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AdSetIntegrador Desafio</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AdSetIntegrador.Presentation.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header style="background-color: #E7E7E7; border-bottom: 1px solid #C6C7C8;">
+        <nav class="navbar" style="background: #E7E7E7;">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="Vehicle" asp-action="Index">
+                    <img src="~/images/adset-integrador.png" alt="AdSet Integrador Logo" />
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div style="padding-left: 96px; background-color: #F6F6F6;">
+        <main role="main" style="background-color: #E7E7E7;">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - AdSetIntegrador Desafio - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
