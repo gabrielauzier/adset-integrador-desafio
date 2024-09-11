@@ -5,58 +5,223 @@
 <div>
     <!-- Vehicles Overview + Stock + Register Link + Save Btn -->
     <div id="vehicles-header-container">
+        <section>
+            <!-- Vehicles Overview -->
+             <div class="vehicles-overview">
 
-        <!-- Vehicles Overview -->
-        <div class="vehicles-overview">
+                <!-- Vehicle Overview Item (total) -->
+                <div class="vehicles-overview-item">
+                    <p>100 veículos</p>
+                    <span id="overview-span-total">Total</span>
+                </div>
 
-            <!-- Vehicle Overview Item (total) -->
-            <div class="vehicles-overview-item">
-                <p>100 veículos</p>
-                <span id="overview-span-total">Total</span>
+                <div class="overview-divider" ></div>
+
+                <!-- Vehicle Overview Item (with pics) -->
+                <div class="vehicles-overview-item">
+                    <p>080 veículos</p>
+                    <span id="overview-span-with-images">com fotos</span>
+                </div>
+
+                <div class="overview-divider"></div>
+
+                <!-- Vehicle Overview Item (no pics) -->
+                <div class="vehicles-overview-item">
+                    <p>030 veículos</p>
+                    <span id="overview-span-no-images">sem fotos</span>
+                </div>
             </div>
 
-            <div class="overview-divider" ></div>
-
-            <!-- Vehicle Overview Item (with pics) -->
-            <div class="vehicles-overview-item">
-                <p>080 veículos</p>
-                <span id="overview-span-with-images">com fotos</span>
+            <!-- Vehicles Stock -->
+            <div class="vehicles-stock">
+                <p>Exportar Estoque</p>
+                <img src="~/images/excel-export.png" />
             </div>
-
-            <div class="overview-divider"></div>
-
-            <!-- Vehicle Overview Item (no pics) -->
-            <div class="vehicles-overview-item">
-                <p>030 veículos</p>
-                <span id="overview-span-no-images">Total</span>
-            </div>
-        </div>
-
-        <!-- Vehicles Stock -->
-        <div class="vehicles-stock">
-            <p>Exportar Estoque</p>
-            <img src="~/images/excel-export.png" />
-        </div>
        
-        <!-- Vehicles Register Link -->
-        <div class="vehicle-register-link">
-            <a>
-                <img src="~/images/vehicle-register-link.png" />
-            </a>
-        </div>
+            <!-- Vehicles Register Link -->
+            <div class="vehicle-register-link">
+                <a>
+                    <img src="~/images/vehicle-register-link.png" />
+                </a>
+            </div>
 
-        <!-- Vehicles Save Btn -->
-        <div style="align-self: end; justify-self: end; margin-left: auto;">
-            <img src="~/images/save-btn.png" />
-        </div>
+            <!-- Vehicles Save Btn -->
+            <div style="align-self: end; justify-self: end; margin-left: auto;">
+                <img src="~/images/save-btn.png" />
+            </div>
+        </section>
     </div>
 
     <!-- Vehicles Filter -->
-    <div id="vehicles-filter-container"></div>
+    <section id="vehicles-filter-container">
+        <img src="~/images/search-btn.png" id="search-btn"/>
 
-    <!-- Vehicles List Header -->
-    <div id="vehicles-list-header-container"></div>
+        <!-- Placa -->
+        <div class="filter-data">
+            <label class="filter-label" for="filter-plate" style="text-align: start; margin-left: 1rem;">Placa</label>
+            <input class="filter-input" id="filter-plate" type="text"/>
+        </div>
+
+        <!-- Marca -->
+        <div class="filter-data">
+            <label class="filter-label" for="filter-brand">Marca</label>
+            <input class="filter-input" id="filter-brand" type="text" />
+        </div>
+
+        <!-- Modelo -->
+        <div class="filter-data">
+            <label class="filter-label" for="filter-model">Modelo</label>
+            <input class="filter-input" id="filter-model" type="text" />
+        </div>
+
+        <!-- Ano min -->
+        <div class="filter-data">
+            <label class="filter-label" for="filter-year-min">Ano min</label>
+            <select class="filter-dropdown" id="filter-year-min" type="number">
+                <option value="">Todos</option>
+                @for (int year = 2000; year <= 2024; year++)
+                {
+                    <option value="@year">@year</option>
+                }
+            </select>
+        </div>
+
+        <!-- Ano max -->
+        <div class="filter-data">
+            <label class="filter-label" for="filter-year-max">Ano max</label>
+            <select class="filter-dropdown" id="filter-year-max" type="number">
+                <option value="">Todos</option>
+                @for (int year = 2000; year <= 2024; year++)
+                {
+                    <option value="@year">@year</option>
+                }
+            </select>
+        </div>
+
+        <!-- Preço -->
+        <div class="filter-data">
+            <label class="filter-label" for="filter-price">Preço</label>
+            <select class="filter-dropdown" id="filter-price" type="number">
+                <option value="0">Todos</option>
+                <option value="1">10mil a 50mil</option>
+                <option value="2">50mil a 90mil</option>
+                <option value="3">+90mil</option>
+            </select>
+        </div>
+  
+        <!-- Fotos -->
+        <div class="filter-data">
+            <label class="filter-label" for="filter-images">Fotos</label>
+            <select class="filter-dropdown" id="filter-images" type="number">
+                <option value="0">Todos</option>
+                <option value="1">Com imagem</option>
+                <option value="2">Sem imagem</option>
+            </select>
+        </div>
+
+        <!-- Opcionais -->
+        <div class="filter-data">
+            <label class="filter-label" for="filter-optionals">Opcionais</label>
+            <input class="filter-input" id="filter-optionals" type="text" />
+        </div>
+
+        <!-- Cor -->
+        <div class="filter-data">
+            <label class="filter-label" for="filter-color">Cor</label>
+            <select class="filter-dropdown" id="filter-color" type="number">
+                <option value="0">Todos</option>
+                <option value="1">Cor 1</option>
+                <option value="2">Cor 2</option>
+            </select>
+        </div>
+    </section>
 
     <!-- Vehicles List -->
-    <div id="vehicles-list-container"></div>
+    <div id="vehicles-list-container">
+
+        <!-- Headers -->
+        <div id="vehicles-list-header-container">
+            <img src="~/images/erase-sorting-badge.png" id="erase-sorting-badge"/>
+            
+            <div id="vehicles-list-header-content">
+
+                <div class="vehicles-list-head">
+                    <span>Marca / Modelo</span>
+                    <img src="~/images/sorting-arrows.png"/>
+                </div>
+
+                <div class="vehicles-list-head">
+                    <span>Ano</span>
+                    <img src="~/images/sorting-arrows.png" />
+                </div>
+
+                <div class="vehicles-list-head">
+                    <span>Preço</span>
+                    <img src="~/images/sorting-arrows.png" />
+                </div>
+
+                <div class="vehicles-list-head">
+                    <span>Fotos </span>
+                    <img src="~/images/sorting-arrows.png" />
+                </div>
+
+            </div>
+
+            <select class="filter-dropdown" id="filter-items-per-page" type="number">
+                @for (int perPage = 10; perPage <= 2024; perPage*=10)
+                {
+                    <option value="@perPage">Exibir 
+                        <strong>
+                            @perPage
+                        </strong>
+                    </option>
+                }
+            </select>
+        </div>
+
+        <!-- Body-->
+        <div id="vehicles-list-body">
+
+            <!-- Vehicle Item -->
+            <div class="vehicle-item">
+                <div class="vehicle-remove"></div>
+
+                <!-- Vehicle Card -->
+                <div class="vehicle-card">
+                    <div class="vehicle-img"></div>
+
+                    <div class="vehicle-data">
+                        <div class="vehicle-data-title">
+                            <strong>MARCA MODELO | ANO</strong>
+                        </div>
+
+                        <div class="vehicle-data-info">
+                            <p>Placa - <span>AAA-0102</span></p>
+                            <p>Km - <span>25.000</span></p>
+                            <p>Cor - <span>Branco</span></p>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-extra">
+                        <img src="~/images/edit-btn.png" style="height: 20px; width: 28px;" />
+
+
+                        <div class="vehicle-extra-info">
+                            <img src="~/images/camera.png" style="height: 14px; width: 18px;" />
+                            <p>08</p>
+                        </div>
+
+                        <div class="vehicle-extra-info">
+                            <img src="~/images/optionals.png" style="height: 16px; width: 24px;" />
+                            <p>Opcionais</p>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-price">
+                        <span>R$ 103.900,00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
