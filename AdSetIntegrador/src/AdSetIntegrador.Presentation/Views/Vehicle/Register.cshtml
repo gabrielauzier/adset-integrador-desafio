@@ -1,0 +1,71 @@
+﻿@model VehicleModel
+
+@{
+    ViewData["Title"] = "Registrar veículo";
+}
+
+
+<form asp-controller="Vehicle" asp-action="Register" method="post" style="max-width: 720px; padding: 2rem 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+    <div class="text-start">
+        <h1>Registrar veículo</h1>
+    </div>
+
+    <div class="form-group">
+        <label class="filter-label" for="nome">Marca</label>
+        <input class="filter-input" type="text" asp-for="Brand" placeholder="Digite a marca">
+        @Html.ValidationMessageFor(x => x.Brand)
+    </div>
+
+    <div class="form-group">
+        <label class="filter-label" for="nome">Modelo</label>
+        <input class="filter-input" type="text" asp-for="Model" placeholder="Digite o modelo">
+        @Html.ValidationMessageFor(x => x.Model)
+    </div>
+
+    <div class="form-group">
+        <label class="filter-label" for="nome">Placa</label>
+        <input class="filter-input" type="text" asp-for="Brand" placeholder="Digite a placa">
+        @Html.ValidationMessageFor(x => x.Plate)
+    </div>
+
+    <div class="form-group">
+        <label class="filter-label" for="nome">Km</label>
+        <input class="filter-input" type="text" asp-for="Mileage" placeholder="Digite a quilometragem (km)">
+        @Html.ValidationMessageFor(x => x.Mileage)
+    </div>
+
+    <div class="form-group">
+        <label class="filter-label" for="nome">Ano</label>
+        <select class="filter-dropdown" type="number" asp-for="Year">
+            @for (int year = 2000; year <= 2024; year++)
+            {
+                <option value="@year">@year</option>
+            }
+        </select>
+        @Html.ValidationMessageFor(x => x.Year)
+    </div>
+
+    <div class="form-group">
+        <label class="filter-label" for="nome">Preço</label>
+        <input class="filter-input" type="number" asp-for="Price" placeholder="Digite o preço">
+        @Html.ValidationMessageFor(x => x.Price)
+    </div>
+
+    <!--
+        <div class="form-group">
+            <label class="filter-label" for="nome">Opcionais</label>
+            <input class="filter-input" type="number" asp-for="Price" placeholder="Digite os opcionais">
+        </div>
+
+        <div class="form-group">
+            <label class="filter-label" for="input-images">Adicionar Imagens</label>
+            <input type="file" id="input-images" name="Images" multiple />
+            <span  class="text-danger"></span>
+        </div>
+    -->
+
+
+    <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+    <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="Vehicle" role="button">Voltar</a>
+
+</form>

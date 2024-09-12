@@ -42,7 +42,7 @@
        
             <!-- Vehicles Register Link -->
             <div class="vehicle-register-link">
-                <a>
+                <a asp-controller="Vehicle" asp-action="Register">
                     <img src="~/images/vehicle-register-link.png" />
                 </a>
             </div>
@@ -280,28 +280,12 @@
                             </div>
 
                             <div class="checkboxes-container">
-                                <small class="checkbox-title">Diamante Feirão</small>
-                                <div class="checkbox-group">
-                                    <input type="checkbox" name="@vehicle.Id" />
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">010</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">008</label>
-                                </div>
-
-                                <small class="checkbox-title">Diamante</small>
+                                <small class="checkbox-title">Básico</small>
                                 <div class="checkbox-group">
                                     <input type="checkbox" name="@vehicle.Id" />
                                     <label class="checkbox-label" style="margin-bottom: 0; color: red;">030</label>&nbsp;
                                     <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
                                     <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">025</label>
-                                </div>
-
-                                <small class="checkbox-title">Platinum</small>
-                                <div class="checkbox-group">
-                                    <input type="checkbox" class="radio" name="@vehicle.Id" />
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">040</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">010</label>
                                 </div>
                             </div>
                         </div>
