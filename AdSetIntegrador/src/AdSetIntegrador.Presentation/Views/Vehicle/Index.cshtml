@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<VehicleModel>
+
+@{
     ViewData["Title"] = "Consuta de Veículos";
 }
 
@@ -55,6 +57,7 @@
     <!-- Vehicles Filter -->
     <section id="vehicles-filter-container">
         <img src="~/images/search-btn.png" id="search-btn"/>
+        <img src="~/images/up-filters.png" id="up-filters"/>
 
         <!-- Placa -->
         <div class="filter-data">
@@ -134,6 +137,11 @@
                 <option value="2">Cor 2</option>
             </select>
         </div>
+
+        <div class="filter-data" style="margin-right: 0.5rem;">
+            <label class="filter-label" style="visibility: hidden;">aa</label>
+            <img src="~/images/erase.png" />
+        </div>
     </section>
 
     <!-- Vehicles List -->
@@ -141,87 +149,164 @@
 
         <!-- Headers -->
         <div id="vehicles-list-header-container">
-            <img src="~/images/erase-sorting-badge.png" id="erase-sorting-badge"/>
-            
             <div id="vehicles-list-header-content">
+                <img src="~/images/erase-sorting-badge.png" id="erase-sorting-badge" />
 
-                <div class="vehicles-list-head">
-                    <span>Marca / Modelo</span>
-                    <img src="~/images/sorting-arrows.png"/>
+                <div id="vehicles-list-header-content">
+
+                    <div class="vehicles-list-head">
+                        <span>Marca / Modelo</span>
+                        <img src="~/images/sorting-arrows.png" />
+                    </div>
+
+                    <div class="vehicles-list-head">
+                        <span>Ano</span>
+                        <img src="~/images/sorting-arrows.png" />
+                    </div>
+
+                    <div class="vehicles-list-head">
+                        <span>Preço</span>
+                        <img src="~/images/sorting-arrows.png" />
+                    </div>
+
+                    <div class="vehicles-list-head">
+                        <span>Fotos </span>
+                        <img src="~/images/sorting-arrows.png" />
+                    </div>
+
                 </div>
 
-                <div class="vehicles-list-head">
-                    <span>Ano</span>
-                    <img src="~/images/sorting-arrows.png" />
-                </div>
-
-                <div class="vehicles-list-head">
-                    <span>Preço</span>
-                    <img src="~/images/sorting-arrows.png" />
-                </div>
-
-                <div class="vehicles-list-head">
-                    <span>Fotos </span>
-                    <img src="~/images/sorting-arrows.png" />
-                </div>
-
+                <select class="filter-dropdown" id="filter-items-per-page" type="number">
+                    @for (int perPage = 10; perPage <= 2024; perPage *= 10)
+                    {
+                        <option value="@perPage">
+                            Exibir
+                            <strong>
+                                @perPage
+                            </strong>
+                        </option>
+                    }
+                </select>
+            </div>
+            
+            <div class="portal">
+                <img src="~/images/logo-icarros.png" />
+                <img src="~/images/arrow-down-erase.png" class="arrow-down-erase" />
             </div>
 
-            <select class="filter-dropdown" id="filter-items-per-page" type="number">
-                @for (int perPage = 10; perPage <= 2024; perPage*=10)
-                {
-                    <option value="@perPage">Exibir 
-                        <strong>
-                            @perPage
-                        </strong>
-                    </option>
-                }
-            </select>
+            <div class="portal">
+                <img src="~/images/logo-webmotors.png" />
+                <img src="~/images/arrow-down-erase.png" class="arrow-down-erase" />
+            </div>
         </div>
 
         <!-- Body-->
         <div id="vehicles-list-body">
+            @if (Model != null && Model.Any())
+                {
+                    foreach(var vehicle in Model)
+                    {
+                        <!-- Vehicle Item -->
+                        <div class="vehicle-item" >
+                            <div class="vehicle-remove">
+                                <button>
+                                    <img src="~/images/trash.png" />
+                                </button>
+                            </div>
 
-            <!-- Vehicle Item -->
-            <div class="vehicle-item">
-                <div class="vehicle-remove"></div>
+                            <!-- Vehicle Card -->
+                            <div class="vehicle-card">
+                                <div class="vehicle-img"></div>
 
-                <!-- Vehicle Card -->
-                <div class="vehicle-card">
-                    <div class="vehicle-img"></div>
+                                <div class="vehicle-data">
+                                    <div class="vehicle-data-title">
+                                        <strong>@vehicle.Brand @vehicle.Model | @vehicle.Year</strong>
+                                    </div>
 
-                    <div class="vehicle-data">
-                        <div class="vehicle-data-title">
-                            <strong>MARCA MODELO | ANO</strong>
+                                    <div class="vehicle-data-info">
+                                        <p>Placa - <span>@vehicle.Plate</span></p>
+                                        <p>Km - <span>@vehicle.Mileage</span></p>
+                                        <p>Cor - <span>@vehicle.Color</span></p>
+                                    </div>
+                                </div>
+
+                                <div class="vehicle-extra">
+                                    <img src="~/images/edit-btn.png" style="height: 20px; width: 28px;" />
+
+
+                                    <div class="vehicle-extra-info">
+                                        <img src="~/images/camera.png" style="height: 14px; width: 18px;" />
+                                        <p>08</p>
+                                    </div>
+
+                                    <div class="vehicle-extra-info">
+                                        <img src="~/images/optionals.png" style="height: 16px; width: 24px;" />
+                                        <p>Opcionais</p>
+                                    </div>
+                                </div>
+
+                                <div class="vehicle-price">
+                                    <span>R$ @vehicle.Price</span>
+                                </div>
+
+                                <img src="~/images/arrow-right-erase.png" />
+                            </div>
+
+                            <!-- Vehicle Cheboxes -->
+                            <div class="checkboxes-container">
+                                <small class="checkbox-title">Diamante Feirão</small>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" name="@vehicle.Id" />
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">010</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">008</label>
+                                </div>
+
+                                <small class="checkbox-title">Diamante</small>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" name="@vehicle.Id" />
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">030</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">025</label>
+                                </div>
+
+                                <small class="checkbox-title">Platinum</small>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" name="@vehicle.Id" />
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">040</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">010</label>
+                                </div>
+                            </div>
+
+                            <div class="checkboxes-container">
+                                <small class="checkbox-title">Diamante Feirão</small>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" name="@vehicle.Id" />
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">010</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">008</label>
+                                </div>
+
+                                <small class="checkbox-title">Diamante</small>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" name="@vehicle.Id" />
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">030</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">025</label>
+                                </div>
+
+                                <small class="checkbox-title">Platinum</small>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" class="radio" name="@vehicle.Id" />
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">040</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
+                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">010</label>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="vehicle-data-info">
-                            <p>Placa - <span>AAA-0102</span></p>
-                            <p>Km - <span>25.000</span></p>
-                            <p>Cor - <span>Branco</span></p>
-                        </div>
-                    </div>
-
-                    <div class="vehicle-extra">
-                        <img src="~/images/edit-btn.png" style="height: 20px; width: 28px;" />
-
-
-                        <div class="vehicle-extra-info">
-                            <img src="~/images/camera.png" style="height: 14px; width: 18px;" />
-                            <p>08</p>
-                        </div>
-
-                        <div class="vehicle-extra-info">
-                            <img src="~/images/optionals.png" style="height: 16px; width: 24px;" />
-                            <p>Opcionais</p>
-                        </div>
-                    </div>
-
-                    <div class="vehicle-price">
-                        <span>R$ 103.900,00</span>
-                    </div>
-                </div>
-            </div>
+                    }
+                }
         </div>
     </div>
 </div>

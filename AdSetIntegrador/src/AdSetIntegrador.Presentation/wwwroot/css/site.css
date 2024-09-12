@@ -98,6 +98,10 @@ strong {
     color: #707173;
 }
 
+button {
+    border: none;
+}
+
 /* --------------------------- Vehicles Overview --------------------------- */
 .vehicles-overview {
     display: flex;
@@ -175,7 +179,7 @@ strong {
     background-color: white;
     max-width: calc(var(--max-width) - 0.5rem);
     border: 0.5px solid #F6F6F6;
-    border-bottom-right-radius: 1rem / 2rem; /* 16px */
+    border-bottom-right-radius: 1rem; /* 16px */
     border-bottom-left-radius: 1rem; /* 16px */
     border-top: none;
     position: relative;
@@ -190,6 +194,12 @@ strong {
     top: 100%;
     left: 50%;
     height: 2.5rem;
+}
+
+#up-filters {
+    position: absolute;
+    top: 100%;
+    right: 1rem;
 }
 
 .filter-data {
@@ -261,8 +271,14 @@ strong {
 
 #vehicles-list-header-container {
     display: flex;
-    align-items: center;
+    align-items: end;
     padding: 0.25rem 0;
+    gap: 1.25rem;
+}
+
+#vehicles-list-header-content {
+    display: flex;
+    align-items: center;
     width: 100%;
     max-width: 36.5rem;
 }
@@ -296,6 +312,19 @@ strong {
     margin-left: auto;
 }
 
+.portal {
+    position: relative;
+    width: 7.25rem;
+    height: 4rem;
+}
+
+.arrow-down-erase {
+    position: absolute;
+    align-self: center;
+    bottom: -0.75rem;
+    left: 30%;
+}
+ 
 /* --------------------------- Vehicles List Body --------------------------- */
 #vehicles-list-body {
     width: 100%;
@@ -315,6 +344,9 @@ strong {
     background-color: var(--surface);
     width: 1.75rem;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* --------------------------- Vehicle Card --------------------------- */
@@ -400,4 +432,65 @@ strong {
 
 .vehicle-price span {
     color: var(--item-green);
+}
+
+.vehicle-card > img {
+    position: absolute;
+    right: -1rem;
+    top: 30%;
+}
+
+/* --------------------------- Vehicle Checkboxes --------------------------- */
+.checkboxes-container {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0 2rem;
+    margin: 0.5rem 0;
+    border-right: 1px solid var(--overview-divider);
+}
+
+.checkbox-label {
+    font-size: 10px;
+    color: green;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+}
+
+.checkbox-group input {
+    margin-right: 0.25rem;
+}
+
+.checkbox-title {
+    font-size: 0.625rem; /*10px*/
+}
+
+div.options > label > input {
+	visibility: hidden;
+}
+
+div.options > label {
+    font-size: 10px;
+    display: block;
+}
+
+div.options > label > img {
+	display: inline-block;
+	padding: 0px;
+	height:10px;
+	width:10px;
+	background: none;
+}
+
+div.options > label > input:checked + img {
+    background: url(http://cdn1.iconfinder.com/data/icons/onebit/PNG/onebit_34.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 10px 10px;
 }
