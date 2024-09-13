@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VehicleModel>
+﻿@model ListViewModel
 
 @{
     ViewData["Title"] = "Consuta de Veículos";
@@ -7,9 +7,9 @@
 <div>
     <!-- Vehicles Overview + Stock + Register Link + Save Btn -->
     <div id="vehicles-header-container">
-        <section>
+        <form>
             <!-- Vehicles Overview -->
-             <div class="vehicles-overview">
+            <div class="vehicles-overview">
 
                 <!-- Vehicle Overview Item (total) -->
                 <div class="vehicles-overview-item">
@@ -17,7 +17,7 @@
                     <span id="overview-span-total">Total</span>
                 </div>
 
-                <div class="overview-divider" ></div>
+                <div class="overview-divider"></div>
 
                 <!-- Vehicle Overview Item (with pics) -->
                 <div class="vehicles-overview-item">
@@ -39,7 +39,7 @@
                 <p>Exportar Estoque</p>
                 <img src="~/images/excel-export.png" />
             </div>
-       
+
             <!-- Vehicles Register Link -->
             <div class="vehicle-register-link">
                 <a asp-controller="Vehicle" asp-action="Register">
@@ -51,98 +51,102 @@
             <div style="align-self: end; justify-self: end; margin-left: auto;">
                 <img src="~/images/save-btn.png" />
             </div>
-        </section>
+        </form>
     </div>
 
     <!-- Vehicles Filter -->
-    <section id="vehicles-filter-container">
-        <img src="~/images/search-btn.png" id="search-btn"/>
-        <img src="~/images/up-filters.png" id="up-filters"/>
+    <form asp-controller="Vehicle" asp-action="Index" method="get">
+        <div id="vehicles-filter-container">
+            <button style="background: none;" type="submit">
+                <img src="~/images/search-btn.png" id="search-btn" />
+            </button>
+            <img src="~/images/up-filters.png" id="up-filters" />
 
-        <!-- Placa -->
-        <div class="filter-data">
-            <label class="filter-label" for="filter-plate" style="text-align: start; margin-left: 1rem;">Placa</label>
-            <input class="filter-input" id="filter-plate" type="text"/>
-        </div>
+            <!-- Placa -->
+            <div class="filter-data">
+                <label class="filter-label" for="filter-plate" style="text-align: start; margin-left: 1rem;">Placa</label>
+                <input class="filter-input" id="filter-plate" asp-for="Filter.Plate" type="text" />
+            </div>
 
-        <!-- Marca -->
-        <div class="filter-data">
-            <label class="filter-label" for="filter-brand">Marca</label>
-            <input class="filter-input" id="filter-brand" type="text" />
-        </div>
+            <!-- Marca -->
+            <div class="filter-data">
+                <label class="filter-label" for="filter-brand">Marca</label>
+                <input class="filter-input" id="filter-brand" asp-for="Filter.Brand" type="text" />
+            </div>
 
-        <!-- Modelo -->
-        <div class="filter-data">
-            <label class="filter-label" for="filter-model">Modelo</label>
-            <input class="filter-input" id="filter-model" type="text" />
-        </div>
+            <!-- Modelo -->
+            <div class="filter-data">
+                <label class="filter-label" for="filter-model">Modelo</label>
+                <input class="filter-input" id="filter-model" asp-for="Filter.Model" type="text" />
+            </div>
 
-        <!-- Ano min -->
-        <div class="filter-data">
-            <label class="filter-label" for="filter-year-min">Ano min</label>
-            <select class="filter-dropdown" id="filter-year-min" type="number">
-                <option value="">Todos</option>
-                @for (int year = 2000; year <= 2024; year++)
-                {
-                    <option value="@year">@year</option>
-                }
-            </select>
-        </div>
+            <!-- Ano min -->
+            <div class="filter-data">
+                <label class="filter-label" for="filter-year-min">Ano min</label>
+                <select class="filter-dropdown" id="filter-year-min" type="number" asp-for="Filter.MinYear">
+                    <option value="">Todos</option>
+                    @for (int year = 2000; year <= 2024; year++)
+                    {
+                        <option value="@year">@year</option>
+                    }
+                </select>
+            </div>
 
-        <!-- Ano max -->
-        <div class="filter-data">
-            <label class="filter-label" for="filter-year-max">Ano max</label>
-            <select class="filter-dropdown" id="filter-year-max" type="number">
-                <option value="">Todos</option>
-                @for (int year = 2000; year <= 2024; year++)
-                {
-                    <option value="@year">@year</option>
-                }
-            </select>
-        </div>
+            <!-- Ano max -->
+            <div class="filter-data">
+                <label class="filter-label" for="filter-year-max">Ano max</label>
+                <select class="filter-dropdown" id="filter-year-max" type="number" asp-for="Filter.MaxYear">
+                    <option value="">Todos</option>
+                    @for (int year = 2000; year <= 2024; year++)
+                    {
+                        <option value="@year">@year</option>
+                    }
+                </select>
+            </div>
 
-        <!-- Preço -->
-        <div class="filter-data">
-            <label class="filter-label" for="filter-price">Preço</label>
-            <select class="filter-dropdown" id="filter-price" type="number">
-                <option value="0">Todos</option>
-                <option value="1">10mil a 50mil</option>
-                <option value="2">50mil a 90mil</option>
-                <option value="3">+90mil</option>
-            </select>
-        </div>
-  
-        <!-- Fotos -->
-        <div class="filter-data">
-            <label class="filter-label" for="filter-images">Fotos</label>
-            <select class="filter-dropdown" id="filter-images" type="number">
-                <option value="0">Todos</option>
-                <option value="1">Com imagem</option>
-                <option value="2">Sem imagem</option>
-            </select>
-        </div>
+            <!-- Preço -->
+            <div class="filter-data">
+                <label class="filter-label" for="filter-price">Preço</label>
+                <select class="filter-dropdown" id="filter-price" type="number" asp-for="Filter.PriceRange">
+                    <option value="">Todos</option>
+                    <option value="1">10mil a 50mil</option>
+                    <option value="2">50mil a 90mil</option>
+                    <option value="3">+90mil</option>
+                </select>
+            </div>
 
-        <!-- Opcionais -->
-        <div class="filter-data">
-            <label class="filter-label" for="filter-optionals">Opcionais</label>
-            <input class="filter-input" id="filter-optionals" type="text" />
-        </div>
+            <!-- Fotos -->
+            <div class="filter-data">
+                <label class="filter-label" for="filter-images">Fotos</label>
+                <select class="filter-dropdown" id="filter-images" type="number" asp-for="Filter.Photos">
+                    <option value="">Todos</option>
+                    <option value="1">Com imagem</option>
+                    <option value="2">Sem imagem</option>
+                </select>
+            </div>
 
-        <!-- Cor -->
-        <div class="filter-data">
-            <label class="filter-label" for="filter-color">Cor</label>
-            <select class="filter-dropdown" id="filter-color" type="number">
-                <option value="0">Todos</option>
-                <option value="1">Cor 1</option>
-                <option value="2">Cor 2</option>
-            </select>
-        </div>
+            <!-- Opcionais -->
+            <div class="filter-data">
+                <label class="filter-label" for="filter-optionals">Opcionais</label>
+                <input class="filter-input" id="filter-optionals" type="text" asp-for="Filter.Optional"/>
+            </div>
 
-        <div class="filter-data" style="margin-right: 0.5rem;">
-            <label class="filter-label" style="visibility: hidden;">aa</label>
-            <img src="~/images/erase.png" />
+            <!-- Cor -->
+            <div class="filter-data">
+                <label class="filter-label" for="filter-color">Cor</label>
+                <select class="filter-dropdown" id="filter-color" type="number" asp-for="Filter.Color">
+                    <option value="">Todos</option>
+                    <option value="1">Cor 1</option>
+                    <option value="2">Cor 2</option>
+                </select>
+            </div>
+
+            <div class="filter-data" style="margin-right: 0.5rem;">
+                <label class="filter-label" style="visibility: hidden;">aa</label>
+                <img src="~/images/erase.png" />
+            </div>
         </div>
-    </section>
+    </form>
 
     <!-- Vehicles List -->
     <div id="vehicles-list-container">
@@ -188,7 +192,7 @@
                     }
                 </select>
             </div>
-            
+
             <div class="portal">
                 <img src="~/images/logo-icarros.png" />
                 <img src="~/images/arrow-down-erase.png" class="arrow-down-erase" />
@@ -202,97 +206,97 @@
 
         <!-- Body-->
         <div id="vehicles-list-body">
-            @if (Model != null && Model.Any())
+            @if (Model != null && Model.Vehicles != null && Model.Vehicles.Any())
+            {
+                foreach (var vehicle in Model.Vehicles)
                 {
-                    foreach(var vehicle in Model)
-                    {
-                        <!-- Vehicle Item -->
-                        <div class="vehicle-item" >
-                            <div class="vehicle-remove">
-                                <a role="button" asp-action="Delete" asp-controller="Vehicle" asp-route-vehicleId="@vehicle.Id">
-                                    <img src="~/images/trash.png" />
+                    <!-- Vehicle Item -->
+                    <div class="vehicle-item">
+                        <div class="vehicle-remove">
+                            <a role="button" asp-action="Delete" asp-controller="Vehicle" asp-route-vehicleId="@vehicle.Id">
+                                <img src="~/images/trash.png" />
+                            </a>
+                        </div>
+
+                        <!-- Vehicle Card -->
+                        <div class="vehicle-card">
+                            <div class="vehicle-img"></div>
+
+                            <div class="vehicle-data">
+                                <div class="vehicle-data-title">
+                                    <strong>@vehicle.Brand @vehicle.Model | @vehicle.Year</strong>
+                                </div>
+
+                                <div class="vehicle-data-info">
+                                    <p>Placa - <span>@vehicle.Plate</span></p>
+                                    <p>Km - <span>@vehicle.Mileage</span></p>
+                                    <p>Cor - <span>@vehicle.Color</span></p>
+                                </div>
+                            </div>
+
+                            <div class="vehicle-extra">
+                                <a role="button" asp-action="Update" asp-controller="Vehicle" asp-route-vehicleId=@vehicle.Id>
+                                    <img src="~/images/edit-btn.png" style="height: 20px; width: 28px;" />
                                 </a>
-                            </div>
 
-                            <!-- Vehicle Card -->
-                            <div class="vehicle-card">
-                                <div class="vehicle-img"></div>
 
-                                <div class="vehicle-data">
-                                    <div class="vehicle-data-title">
-                                        <strong>@vehicle.Brand @vehicle.Model | @vehicle.Year</strong>
-                                    </div>
-
-                                    <div class="vehicle-data-info">
-                                        <p>Placa - <span>@vehicle.Plate</span></p>
-                                        <p>Km - <span>@vehicle.Mileage</span></p>
-                                        <p>Cor - <span>@vehicle.Color</span></p>
-                                    </div>
+                                <div class="vehicle-extra-info">
+                                    <img src="~/images/camera.png" style="height: 14px; width: 18px;" />
+                                    <p>08</p>
                                 </div>
 
-                                <div class="vehicle-extra">
-                                    <a role="button" asp-action="Update" asp-controller="Vehicle" asp-route-vehicleId=@vehicle.Id>
-                                        <img src="~/images/edit-btn.png" style="height: 20px; width: 28px;" />
-                                    </a>
-
-
-                                    <div class="vehicle-extra-info">
-                                        <img src="~/images/camera.png" style="height: 14px; width: 18px;" />
-                                        <p>08</p>
-                                    </div>
-
-                                    <div class="vehicle-extra-info">
-                                        <img src="~/images/optionals.png" style="height: 16px; width: 24px;" />
-                                        <p>Opcionais</p>
-                                    </div>
-                                </div>
-
-                                <div class="vehicle-price">
-                                    <span>R$ @vehicle.Price</span>
-                                </div>
-
-                                <img src="~/images/arrow-right-erase.png" />
-                            </div>
-
-                            <!-- Vehicle Cheboxes -->
-                            <div class="checkboxes-container">
-                                <small class="checkbox-title">Diamante Feirão</small>
-                                <div class="checkbox-group">
-                                    <input type="checkbox" name="@vehicle.Id" />
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">010</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">008</label>
-                                </div>
-
-                                <small class="checkbox-title">Diamante</small>
-                                <div class="checkbox-group">
-                                    <input type="checkbox" name="@vehicle.Id" />
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">030</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">025</label>
-                                </div>
-
-                                <small class="checkbox-title">Platinum</small>
-                                <div class="checkbox-group">
-                                    <input type="checkbox" name="@vehicle.Id" />
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">040</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">010</label>
+                                <div class="vehicle-extra-info">
+                                    <img src="~/images/optionals.png" style="height: 16px; width: 24px;" />
+                                    <p>Opcionais</p>
                                 </div>
                             </div>
 
-                            <div class="checkboxes-container">
-                                <small class="checkbox-title">Básico</small>
-                                <div class="checkbox-group">
-                                    <input type="checkbox" name="@vehicle.Id" />
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: red;">030</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
-                                    <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">025</label>
-                                </div>
+                            <div class="vehicle-price">
+                                <span>R$ @vehicle.Price</span>
+                            </div>
+
+                            <img src="~/images/arrow-right-erase.png" />
+                        </div>
+
+                        <!-- Vehicle Cheboxes -->
+                        <div class="checkboxes-container">
+                            <small class="checkbox-title">Diamante Feirão</small>
+                            <div class="checkbox-group">
+                                <input type="checkbox" name="@vehicle.Id" />
+                                <label class="checkbox-label" style="margin-bottom: 0; color: red;">010</label>&nbsp;
+                                <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
+                                <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">008</label>
+                            </div>
+
+                            <small class="checkbox-title">Diamante</small>
+                            <div class="checkbox-group">
+                                <input type="checkbox" name="@vehicle.Id" />
+                                <label class="checkbox-label" style="margin-bottom: 0; color: red;">030</label>&nbsp;
+                                <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
+                                <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">025</label>
+                            </div>
+
+                            <small class="checkbox-title">Platinum</small>
+                            <div class="checkbox-group">
+                                <input type="checkbox" name="@vehicle.Id" />
+                                <label class="checkbox-label" style="margin-bottom: 0; color: red;">040</label>&nbsp;
+                                <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
+                                <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">010</label>
                             </div>
                         </div>
-                    }
+
+                        <div class="checkboxes-container">
+                            <small class="checkbox-title">Básico</small>
+                            <div class="checkbox-group">
+                                <input type="checkbox" name="@vehicle.Id" />
+                                <label class="checkbox-label" style="margin-bottom: 0; color: red;">030</label>&nbsp;
+                                <label class="checkbox-label" style="margin-bottom: 0;">-</label>&nbsp;
+                                <label class="checkbox-label" style="margin-bottom: 0; color: #40A52B;">025</label>
+                            </div>
+                        </div>
+                    </div>
                 }
+            }
         </div>
     </div>
 </div>

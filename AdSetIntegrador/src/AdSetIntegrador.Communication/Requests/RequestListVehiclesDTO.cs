@@ -10,4 +10,6 @@ public class RequestListVehiclesDTO {
     public int? MaxYear { get; set; }
     public PriceRange? PriceRange { get; set; }
     public string? Color { get; set; }
+    public string? Optional { get; set; }
+    public PhotosOption? Photos { get; set; }
 }

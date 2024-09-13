@@ -1,24 +1,50 @@
 ﻿using AdSetIntegrador.Application.UseCases.Vehicles.List;
 using AdSetIntegrador.Application.UseCases.Vehicles.Register;
-using AdSetIntegrador.Presentation.Models;
-using Microsoft.AspNetCore.Mvc;
-using AdSetIntegrador.Presentation.Mappers;
 using AdSetIntegrador.Application.UseCases.Vehicles.GetVehicleById;
-using AdSetIntegrador.Domain.Repositories;
 using AdSetIntegrador.Application.UseCases.Vehicles.Delete;
 using AdSetIntegrador.Application.UseCases.Vehicles.Update;
+using AdSetIntegrador.Presentation.Models;
+using AdSetIntegrador.Presentation.Mappers;
+using Microsoft.AspNetCore.Mvc;
+using AdSetIntegrador.Communication.Requests;
 
 namespace AdSetIntegrador.Presentation.Controllers
 {
     public class VehicleController : Controller
     {
         public IActionResult Index(
+            ListViewModel listViewModel,
             [FromServices] IListVehiclesUseCase useCase
-        ) {
-            var response = useCase.Execute();
-            var vehicleModel = VehicleMapper.ToViewList(response);
+        )
+        {
+            try
+            {
+                System.Console.WriteLine("AQUI 22222222");
 
-            return View(vehicleModel);
+                var request = new RequestListVehiclesDTO();
+
+                if (listViewModel.Filter != null)
+                {
+                    request = FilterMapper.ToRequest(listViewModel.Filter);
+                }
+
+                System.Console.WriteLine("Oia => " + request.Brand);
+
+                var response = useCase.Execute(request);
+
+                return View("Index", new ListViewModel
+                {
+                    Filter = FilterMapper.ToFilter(request),
+                    Vehicles = VehicleMapper.VehiclesToListView(response)
+                });
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Caiu aqui no erro, pae");
+                System.Console.WriteLine(ex.Message);
+                System.Console.WriteLine(ex.StackTrace);
+                return View("Index", listViewModel);
+            };
         }
 
         public IActionResult Register()

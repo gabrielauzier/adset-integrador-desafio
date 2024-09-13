@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdSetIntegrador.Communication\AdSetIntegrador.Communication.csproj" />
+  </ItemGroup>
+
 </Project>

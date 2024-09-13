@@ -49,7 +49,7 @@ public static class VehicleMapper
         };
     }
 
-    public static List<VehicleModel> ToViewList(List<Vehicle> vehicles)
+    public static List<VehicleModel> VehiclesToListView(List<Vehicle> vehicles)
     {
         return vehicles.Select(vehicle => new VehicleModel
          {
@@ -62,5 +62,14 @@ public static class VehicleMapper
              Price = vehicle.Price,
              Year = vehicle.Year
          }).ToList();
+    }
+
+    public static ListViewModel ToListView(List<Vehicle> vehicles)
+    {
+        return new ListViewModel
+        {
+            Filter = null,
+            Vehicles = VehiclesToListView(vehicles)
+        };
     }
 }

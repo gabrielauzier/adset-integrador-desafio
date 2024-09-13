@@ -175,6 +175,9 @@ button {
 
 /* --------------------------- Vehicles Filter --------------------------- */
 #vehicles-filter-container {
+    width: 100%;
+    display: flex;
+    max-width: 60rem;
     margin-left: 0.5rem;
     background-color: white;
     max-width: calc(var(--max-width) - 0.5rem);
@@ -187,6 +190,12 @@ button {
     gap: 0.25rem;
     padding: 0.75rem 0.25rem;
     justify-content: space-between;
+}
+
+#vehicles-header-container form {
+    width: 100%;
+    display: flex;
+    max-width: 60rem;
 }
 
 #search-btn {

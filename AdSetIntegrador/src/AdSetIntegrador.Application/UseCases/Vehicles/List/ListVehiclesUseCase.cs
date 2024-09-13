@@ -1,4 +1,5 @@
-﻿using AdSetIntegrador.Domain.Entities;
+﻿using AdSetIntegrador.Communication.Requests;
+using AdSetIntegrador.Domain.Entities;
 using AdSetIntegrador.Domain.Repositories;
 
 namespace AdSetIntegrador.Application.UseCases.Vehicles.List;
@@ -12,9 +13,9 @@ public class ListVehiclesUseCase : IListVehiclesUseCase
         _vehiclesRepository = vehiclesRepository;
     }
 
-    public List<Vehicle> Execute()
+    public List<Vehicle> Execute(RequestListVehiclesDTO request)
     {
-        var vehicles = _vehiclesRepository.List();
+        var vehicles = _vehiclesRepository.List(request);
 
         return vehicles;
     }
