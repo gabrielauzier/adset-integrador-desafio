@@ -76,6 +76,7 @@ public static class VehicleMapper
                 Plate = vehicle.Plate,
                 Price = vehicle.Price,
                 Year = vehicle.Year,
+                Images = vehicle.Images,
                 ImgBase64 = imgBase64,
                 ImgContentType = contentType
             };

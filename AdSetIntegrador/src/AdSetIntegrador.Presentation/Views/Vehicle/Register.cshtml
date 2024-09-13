@@ -5,7 +5,7 @@
 }
 
 
-<form asp-controller="Vehicle" asp-action="@ViewBag.Action" method="post" enctype="multipart/form-data" style="max-width: 720px; padding: 2rem 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+<form asp-controller="Vehicle" asp-action="Register" method="post" enctype="multipart/form-data" style="max-width: 720px; padding: 2rem 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
     <div class="text-start">
         <h1>Registrar veículo</h1>
     </div>
@@ -52,7 +52,7 @@
     </div>
 
     <div class="form-group">
-        <label class="filter-label" for="nome">Placa</label>
+        <label class="filter-label" for="nome">Cor</label>
         <input class="filter-input" type="text" asp-for="Color" placeholder="Digite a cor">
         @Html.ValidationMessageFor(x => x.Color)
     </div>
@@ -65,19 +65,17 @@
         </div>
     -->
 
-        <div class="form-group">
-            <label class="filter-label" for="Images">Adicionar Imagens</label>
-            <input type="file" id="imageFiles" name="imageFiles" multiple />
-            @Html.ValidationMessageFor(x => x.Images)
-        </div>
+    <div class="form-group">
+        <label class="filter-label" for="Images">Adicionar Imagens</label>
+        <input type="file" id="imageFiles" name="imageFiles" multiple />
+        @Html.ValidationMessageFor(x => x.Images)
+    </div>
 
 
-        <div class="save-menu">
-            <a class="btn " asp-action="Index" asp-controller="Vehicle" role="button">❌ Cancelar</a>
-            <button type="submit" style="background: none;">
-                <img src="~/images/save-btn.png" />
-            </button>
-        </div>
-    
-
+    <div class="save-menu">
+        <a class="btn " asp-action="Index" asp-controller="Vehicle" role="button">❌ Cancelar</a>
+        <button type="submit" style="background: none;">
+            <img src="~/images/save-btn.png" />
+        </button>
+    </div>
 </form>
