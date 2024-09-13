@@ -1,5 +1,5 @@
 ﻿using AdSetIntegrador.Communication.Requests;
-using AdSetIntegrador.Exception;
+using AdSetIntegrador.Exceptions;
 using FluentValidation;
 
 namespace AdSetIntegrador.Application.UseCases.Vehicles.Delete;

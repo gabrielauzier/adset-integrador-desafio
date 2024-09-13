@@ -1,7 +1,6 @@
 ﻿using AdSetIntegrador.Communication.Requests;
 using AdSetIntegrador.Communication.Responses;
 using AdSetIntegrador.Domain.Repositories;
-using AdSetIntegrador.Exception.ExceptionsBase;
 
 namespace AdSetIntegrador.Application.UseCases.Vehicles.Update;
 
@@ -16,8 +15,6 @@ public class UpdateVehicleUseCase : IUpdateVehicleUseCase
 
     public ResponseUpdateVehicleJson Execute(RequestUpdateVehicleJson request)
     {
-        Validate(request);
-
         var vehicle = _vehiclesRepository.GetById(request.Id);
 
         if (vehicle == null)
@@ -41,13 +38,11 @@ public class UpdateVehicleUseCase : IUpdateVehicleUseCase
     private void Validate(RequestUpdateVehicleJson request)
     {
         var validator = new UpdateVehicleValidator();
-
         var result = validator.Validate(request);
 
         if (result.IsValid == false)
         {
             var errorMessages = result.Errors.Select(f => f.ErrorMessage).ToList();
-
             throw new ErrorOnValidationException(errorMessages);
         }
     }

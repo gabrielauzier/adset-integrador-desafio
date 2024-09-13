@@ -209,9 +209,9 @@
                         <!-- Vehicle Item -->
                         <div class="vehicle-item" >
                             <div class="vehicle-remove">
-                                <button>
+                                <a role="button" asp-action="Delete" asp-controller="Vehicle" asp-route-vehicleId="@vehicle.Id">
                                     <img src="~/images/trash.png" />
-                                </button>
+                                </a>
                             </div>
 
                             <!-- Vehicle Card -->
@@ -231,7 +231,9 @@
                                 </div>
 
                                 <div class="vehicle-extra">
-                                    <img src="~/images/edit-btn.png" style="height: 20px; width: 28px;" />
+                                    <a role="button" asp-action="Update" asp-controller="Vehicle" asp-route-vehicleId=@vehicle.Id>
+                                        <img src="~/images/edit-btn.png" style="height: 20px; width: 28px;" />
+                                    </a>
 
 
                                     <div class="vehicle-extra-info">

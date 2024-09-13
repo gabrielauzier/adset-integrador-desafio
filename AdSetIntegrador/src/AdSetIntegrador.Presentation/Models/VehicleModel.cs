@@ -8,37 +8,37 @@ public class VehicleModel
     [Key]
     public int Id { get; set; }
 
-    [Required(ErrorMessage = "O campo Marca é obrigatório.")]
-    [MaxLength(100, ErrorMessage = "O campo Marca pode ter no máximo 100 caracteres.")]
+    [Required(ErrorMessage = "A Marca é obrigatória.")]
+    [MaxLength(255, ErrorMessage = "A Marca pode ter no máximo 255 caracteres.")]
     [DisplayName("Marca")]
     public string Brand { get; set; }
 
-    [Required(ErrorMessage = "O campo Modelo é obrigatório.")]
-    [MaxLength(100, ErrorMessage = "O campo Modelo pode ter no máximo 100 caracteres.")]
+    [Required(ErrorMessage = "O Modelo é obrigatório.")]
+    [MaxLength(255, ErrorMessage = "O Modelo pode ter no máximo 255 caracteres.")]
     [DisplayName("Modelo")]
     public string Model { get; set; }
 
-    [Required(ErrorMessage = "O campo Ano é obrigatório.")]
+    [Required(ErrorMessage = "O Ano é obrigatório.")]
     [Range(2000, 2024, ErrorMessage = "O Ano deve estar entre 2000 e 2024.")]
     [DisplayName("Ano")]
     public int Year { get; set; }
 
-    [Required(ErrorMessage = "O campo Placa é obrigatório.")]
+    [Required(ErrorMessage = "A Placa é obrigatória.")]
     [MaxLength(20)]
     [DisplayName("Placa")]
     public string Plate { get; set; }
 
-    [Range(0, int.MaxValue)]
+    [Range(0, int.MaxValue, ErrorMessage = "A quilometragem deve ser maior que zero.")]
     [DisplayName("Km")]
     public int? Mileage { get; set; }
 
-    [Required(ErrorMessage = "O campo Cor é obrigatório.")]
+    [Required(ErrorMessage = "A Cor é obrigatória.")]
     [MaxLength(50)]
     [DisplayName("Cor")]
     public string Color { get; set; }
 
-    [Required(ErrorMessage = "O campo Preço é obrigatório.")]
-    [Range(10000, double.MaxValue, ErrorMessage = "O Preço deve ser maior ou igual a R$ 10000")]
+    [Required(ErrorMessage = "O Preço é obrigatório.")]
+    [Range(0, double.MaxValue, ErrorMessage = "O Preço deve ser maior ou igual a R$ 0,00")]
     [DisplayName("Preço")]
     public decimal Price { get; set; }
 }

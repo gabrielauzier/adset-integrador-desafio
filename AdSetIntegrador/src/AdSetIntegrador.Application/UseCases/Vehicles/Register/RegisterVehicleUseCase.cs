@@ -14,11 +14,8 @@ public class RegisterVehicleUseCase : IRegisterVehicleUseCase
         _vehiclesRepository = vehiclesRepository;
     }
 
-
     public ResponseRegisterVehicleJson Execute(RequestRegisterVehicleJson request)
     {
-        Validate(request);
-
         var vehicle = new Vehicle
         {
             Brand = request.Brand,

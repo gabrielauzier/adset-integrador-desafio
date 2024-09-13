@@ -18,7 +18,7 @@
     <ProjectReference Include="..\AdSetIntegrador.Application\AdSetIntegrador.Application.csproj" />
     <ProjectReference Include="..\AdSetIntegrador.Communication\AdSetIntegrador.Communication.csproj" />
     <ProjectReference Include="..\AdSetIntegrador.Domain\AdSetIntegrador.Domain.csproj" />
-    <ProjectReference Include="..\AdSetIntegrador.Exception\AdSetIntegrador.Exception.csproj" />
+    <ProjectReference Include="..\AdSetIntegrador.Exception\AdSetIntegrador.Exceptions.csproj" />
     <ProjectReference Include="..\AdSetIntegrador.Infrastructure\AdSetIntegrador.Infrastructure.csproj" />
   </ItemGroup>
 

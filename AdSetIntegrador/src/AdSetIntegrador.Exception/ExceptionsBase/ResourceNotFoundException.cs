@@ -1,4 +1,4 @@
-﻿using AdSetIntegrador.Exception.ExceptionsBase;
+﻿using AdSetIntegrador.Exceptions.ExceptionsBase;
 
 public class ResourceNotFoundException : AdSetIntegradorException {
     public string Error { get; set; }

@@ -4,5 +4,5 @@ namespace AdSetIntegrador.Application.UseCases.Vehicles.Delete;
 
 public interface IDeleteVehicleUseCase
 {
-    public void Execute(RequestDeleteVehicleDTO request);
+    public void Execute(int vehicleId);
 }

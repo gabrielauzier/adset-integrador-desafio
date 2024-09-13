@@ -1,10 +1,12 @@
 ﻿using AdSetIntegrador.Application.UseCases.Vehicles.List;
 using AdSetIntegrador.Application.UseCases.Vehicles.Register;
-using AdSetIntegrador.Communication.Requests;
 using AdSetIntegrador.Presentation.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+using AdSetIntegrador.Presentation.Mappers;
+using AdSetIntegrador.Application.UseCases.Vehicles.GetVehicleById;
+using AdSetIntegrador.Domain.Repositories;
+using AdSetIntegrador.Application.UseCases.Vehicles.Delete;
+using AdSetIntegrador.Application.UseCases.Vehicles.Update;
 
 namespace AdSetIntegrador.Presentation.Controllers
 {
@@ -14,18 +16,7 @@ namespace AdSetIntegrador.Presentation.Controllers
             [FromServices] IListVehiclesUseCase useCase
         ) {
             var response = useCase.Execute();
-
-            var vehicleModel = response.Select(vehicle => new VehicleModel            
-            {
-                Brand = vehicle.Brand,
-                Color = vehicle.Color,
-                Id = vehicle.Id,
-                Mileage = vehicle.Mileage,
-                Model = vehicle.Model,
-                Plate = vehicle.Plate,
-                Price = vehicle.Price,
-                Year = vehicle.Year
-            });
+            var vehicleModel = VehicleMapper.ToViewList(response);
 
             return View(vehicleModel);
         }
@@ -36,30 +27,71 @@ namespace AdSetIntegrador.Presentation.Controllers
             return View("Register", new VehicleModel());
         }
 
+        public IActionResult Update(
+            int vehicleId,
+            [FromServices] IGetVehicleByIdUseCase useCase
+        )
+        {
+            var vehicle = useCase.Execute(vehicleId);
+
+            if (vehicle == null)
+            {
+                return View("Index");
+            }
+
+            return View("Update", VehicleMapper.ToView(vehicle));
+        }
+
+        public IActionResult Delete(
+            int vehicleId,
+            [FromServices] IDeleteVehicleUseCase useCase
+        )
+        {
+            useCase.Execute(vehicleId);
+
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public IActionResult Register(
-            VehicleModel vehicle,
-            [FromServices] IRegisterVehicleUseCase useCase
-        ) {
+             VehicleModel vehicle,
+             [FromServices] IRegisterVehicleUseCase useCase
+        )
+        {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    useCase.Execute(new RequestRegisterVehicleJson
-                    {
-                        Brand = vehicle.Brand,
-                        Color = vehicle.Color,
-                        Mileage = vehicle.Mileage,
-                        Model = vehicle.Model,
-                        Plate = vehicle.Plate,
-                        Price = vehicle.Price,
-                        Year = vehicle.Year
-                    });
+                    var response = useCase.Execute(VehicleMapper.ToRegister(vehicle));
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+                return View(vehicle);
             }
-            catch {
-                return RedirectToAction("Index");
+            catch
+            {
+                return View(vehicle);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Update(
+            VehicleModel vehicle,
+            [FromServices] IUpdateVehicleUseCase useCase
+        )
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var response = useCase.Execute(VehicleMapper.ToUpdate(vehicle));
+                    return RedirectToAction("Index");
+                }
+                return View(vehicle);
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+                return View(vehicle);
             }
         }
     }

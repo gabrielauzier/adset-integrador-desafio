@@ -1,5 +1,5 @@
 ﻿using AdSetIntegrador.Communication.Responses;
-using AdSetIntegrador.Exception.ExceptionsBase;
+using AdSetIntegrador.Exceptions.ExceptionsBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 

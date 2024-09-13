@@ -1,3 +1,3 @@
-﻿namespace AdSetIntegrador.Exception.ExceptionsBase;
+﻿namespace AdSetIntegrador.Exceptions.ExceptionsBase;
 
 public abstract class AdSetIntegradorException : SystemException {}

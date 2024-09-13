@@ -12,11 +12,9 @@ public class DeleteVehicleUseCase : IDeleteVehicleUseCase
         _vehiclesRepository = vehiclesRepository;
     }
 
-    public void Execute(RequestDeleteVehicleDTO request)
+    public void Execute(int vehicleId)
     {
-        Validate(request);
-
-        var vehicle = _vehiclesRepository.GetById(request.Id);
+        var vehicle = _vehiclesRepository.GetById(vehicleId);
 
         if (vehicle == null)
         {

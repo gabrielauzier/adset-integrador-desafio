@@ -221,6 +221,7 @@ button {
     line-height: 1.25rem;
     border: 1px solid #c9c9ca;
     border-radius: 11px / 9px;
+    padding: 0 1rem;
     width: 100%;
     height: 1.5rem;
 }
@@ -493,4 +494,18 @@ div.options > label > input:checked + img {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 10px 10px;
+}
+
+/* --------------------------- Vehicle Register --------------------------- */
+.field-validation-error {
+    color: var(--overview-red);
+    font-size: 0.6875rem; /* 11px */
+}
+
+.save-menu {
+    align-self: end;
+    justify-self: end;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
 }
