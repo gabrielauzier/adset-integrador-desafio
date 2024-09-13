@@ -16,7 +16,8 @@ public static class VehicleMapper
             Model = vehicle.Model,
             Plate = vehicle.Plate,
             Price = vehicle.Price,
-            Year = vehicle.Year
+            Year = vehicle.Year,
+            Optional = vehicle.Optional ?? ""
         };
     }
 
@@ -31,7 +32,8 @@ public static class VehicleMapper
             Plate = vehicle.Plate,
             Price = vehicle.Price,
             Year = vehicle.Year,
-            Images = images ?? []
+            Images = images ?? [],
+            Optional = vehicle.Optional ?? "",
         };
     }
 
@@ -47,7 +49,8 @@ public static class VehicleMapper
             Plate = vehicle.Plate,
             Price = vehicle.Price,
             Year = vehicle.Year,
-            Images = images ?? []
+            Images = images ?? [],
+            Optional = vehicle.Optional ?? "",
         };
     }
 
@@ -78,7 +81,8 @@ public static class VehicleMapper
                 Year = vehicle.Year,
                 Images = vehicle.Images,
                 ImgBase64 = imgBase64,
-                ImgContentType = contentType
+                ImgContentType = contentType,
+                Optional = vehicle.Optional
             };
         }).ToList();
     }

@@ -13,7 +13,7 @@
 
                 <!-- Vehicle Overview Item (total) -->
                 <div class="vehicles-overview-item">
-                    <p>100 veículos</p>
+                    <p>@Model.Overview.Total veículos</p>
                     <span id="overview-span-total">Total</span>
                 </div>
 
@@ -21,7 +21,7 @@
 
                 <!-- Vehicle Overview Item (with pics) -->
                 <div class="vehicles-overview-item">
-                    <p>080 veículos</p>
+                    <p>@Model.Overview.TotalWithImages veículos</p>
                     <span id="overview-span-with-images">com fotos</span>
                 </div>
 
@@ -29,7 +29,7 @@
 
                 <!-- Vehicle Overview Item (no pics) -->
                 <div class="vehicles-overview-item">
-                    <p>020 veículos</p>
+                    <p>@Model.Overview.TotalWithoutImages veículos</p>
                     <span id="overview-span-no-images">sem fotos</span>
                 </div>
             </div>
@@ -136,8 +136,10 @@
                 <label class="filter-label" for="filter-color">Cor</label>
                 <select class="filter-dropdown" id="filter-color" type="number" asp-for="Filter.Color">
                     <option value="">Todos</option>
-                    <option value="1">Cor 1</option>
-                    <option value="2">Cor 2</option>
+                    @foreach (string color in Model.Overview.Colors ?? [])
+                    {
+                        <option value="@color">@color</option>
+                    }
                 </select>
             </div>
 

@@ -43,6 +43,10 @@ public class VehicleModel
     [DisplayName("Preço")]
     public decimal Price { get; set; }
 
+    [DisplayName("Opcionais")]
+    [MaxLength(500)]
+    public string? Optional { get; set; }
+
     public ICollection<Image> Images { get; set; } = [];
     public string? ImgBase64 { get; set; }
     public string? ImgContentType { get; set; }

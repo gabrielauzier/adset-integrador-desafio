@@ -13,6 +13,11 @@ internal class ImagesRepository : IImagesRepository
 
     }
 
+    public void Remove(Image image)
+    {
+        _dbContext.Images.Remove(image);
+    }
+
     public void Upload(Image image)
     {
         _dbContext.Images.Add(image);

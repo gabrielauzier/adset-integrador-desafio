@@ -10,4 +10,8 @@ public interface IVehiclesRepository
     void Save();
     Vehicle? GetById(int vehicleId);
     List<Vehicle> List(ListVehiclesOptions options);
+    int CountTotal();
+    int CountWithImages();
+    int CountWithoutImages();
+    string[] GetAllColors();
 }

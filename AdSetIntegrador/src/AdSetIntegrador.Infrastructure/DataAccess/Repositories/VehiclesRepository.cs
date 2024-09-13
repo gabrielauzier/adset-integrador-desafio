@@ -4,6 +4,7 @@ using AdSetIntegrador.Infrastructure.Helpers;
 using AdSetIntegrador.Domain.Options;
 using AdSetIntegrador.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace AdSetIntegrador.Infrastructure.DataAccess.Repositories;
 
@@ -46,6 +47,7 @@ internal class VehiclesRepository : IVehiclesRepository
             .Filter(!String.IsNullOrEmpty(options.Color), v => v.Color.Contains(options.Color ?? ""))
             .Filter(!String.IsNullOrEmpty(options.Brand), v => v.Brand.Contains(options.Brand ?? ""))
             .Filter(!String.IsNullOrEmpty(options.Model), v => v.Model.Contains(options.Model ?? ""))
+            .Filter(!String.IsNullOrEmpty(options.Optional), v => v.Model.Contains(options.Optional ?? ""))
             .Filter(options.MinYear.HasValue, v => v.Year >= options.MinYear)
             .Filter(options.MaxYear.HasValue, v => v.Year <= options.MaxYear)
             .Filter(options.PriceRange == PriceRange.Low, v => v.Price >= 10 * 1000 && v.Price <= 50 * 1000)
@@ -53,11 +55,30 @@ internal class VehiclesRepository : IVehiclesRepository
             .Filter(options.PriceRange == PriceRange.High, v => v.Price >= 90 * 1000)
             .Filter(options.Photos == PhotosOption.WithPhotos, v => v.Images.Count() > 0)
             .Filter(options.Photos == PhotosOption.NoPhotos, v => v.Images.Count() == 0)
-            
             .AsQueryable();
 
         /*
         */
         return result.ToList();
+    }
+
+    public int CountTotal()
+    {
+        return _dbContext.Vehicles.Count();
+    }
+
+    public int CountWithImages()
+    {
+        return _dbContext.Vehicles.Include(v => v.Images).Where(v => v.Images.Count > 0).Count();
+    }
+
+    public int CountWithoutImages()
+    {
+        return _dbContext.Vehicles.Include(v => v.Images).Where(v => v.Images.Count == 0).Count();
+    }
+
+    public string[] GetAllColors()
+    {
+        return _dbContext.Vehicles.Select(v => v.Color).Distinct().ToArray();
     }
 }

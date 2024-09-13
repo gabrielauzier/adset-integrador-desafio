@@ -12,4 +12,5 @@ public class RequestRegisterVehicleJson
     public string Color { get; set; } = string.Empty;
     public decimal Price { get; set; }
     public ICollection<Image> Images { get; set; } = [];
+    public string? Optional { get; set; } = string.Empty;
 }

@@ -29,6 +29,6 @@ public class ListVehiclesUseCase : IListVehiclesUseCase
             Plate = request.Plate
         });
 
-        return vehicles;
+        return vehicles ?? [];
     }
 }

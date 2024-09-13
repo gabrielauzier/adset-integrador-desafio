@@ -59,13 +59,11 @@
         @Html.ValidationMessageFor(x => x.Color)
     </div>
 
-
-    <!--
-        <div class="form-group">
-            <label class="filter-label" for="nome">Opcionais</label>
-            <input class="filter-input" type="number" asp-for="Price" placeholder="Digite os opcionais">
-        </div>
-    -->
+    <div class="form-group">
+        <label class="filter-label" for="nome">Opcionais</label>
+        <input class="filter-input" type="text" asp-for="Optional" placeholder="Digite os opcionais">
+        @Html.ValidationMessageFor(x => x.Optional)
+    </div>
 
     <div class="form-group">
         <label class="filter-label" for="Images">Adicionar Imagens</label>

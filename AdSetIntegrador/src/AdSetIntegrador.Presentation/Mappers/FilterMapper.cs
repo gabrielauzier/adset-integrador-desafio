@@ -8,11 +8,6 @@ public static class FilterMapper
 {
     public static RequestListVehiclesDTO ToRequest(FilterModel filter)
     {
-        System.Console.WriteLine("amig, estou aqui...");
-        System.Console.WriteLine("plate " + filter.Plate);
-        System.Console.WriteLine("brand " + filter.Brand);
-        System.Console.WriteLine("model " + filter.Model);
-
         return new RequestListVehiclesDTO
         {
             Plate = filter.Plate ?? "",

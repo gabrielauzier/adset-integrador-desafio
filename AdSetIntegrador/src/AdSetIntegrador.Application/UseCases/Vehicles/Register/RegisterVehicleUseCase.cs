@@ -27,7 +27,7 @@ public class RegisterVehicleUseCase : IRegisterVehicleUseCase
             Plate = request.Plate,
             Price = request.Price,
             Year = request.Year,
-            
+            Optional = request.Optional
         };
         _vehiclesRepository.Create(vehicle);
 

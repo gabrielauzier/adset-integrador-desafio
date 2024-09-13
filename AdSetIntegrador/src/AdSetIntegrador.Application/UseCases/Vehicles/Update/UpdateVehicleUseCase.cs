@@ -32,6 +32,12 @@ public class UpdateVehicleUseCase : IUpdateVehicleUseCase
         vehicle.Mileage = request.Mileage;
         vehicle.Color = request.Color;
         vehicle.Price = request.Price;
+        vehicle.Optional = request.Optional;
+
+        foreach (var Image in vehicle.Images)
+        {
+            _imagesRepository.Remove(Image);
+        }
 
         foreach (var Image in request.Images)
         {

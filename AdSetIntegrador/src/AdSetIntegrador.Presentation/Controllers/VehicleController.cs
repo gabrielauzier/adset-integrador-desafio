@@ -8,6 +8,7 @@ using AdSetIntegrador.Presentation.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using AdSetIntegrador.Communication.Requests;
 using AdSetIntegrador.Domain.Entities;
+using AdSetIntegrador.Application.UseCases.Vehicles.Overview;
 
 namespace AdSetIntegrador.Presentation.Controllers
 {
@@ -15,7 +16,8 @@ namespace AdSetIntegrador.Presentation.Controllers
     {
         public IActionResult Index(
             ListViewModel listViewModel,
-            [FromServices] IListVehiclesUseCase useCase
+            [FromServices] IListVehiclesUseCase listVehicles,
+            [FromServices] IGetVehiclesOverviewUseCase getVehiclesOverview
         )
         {
             try
@@ -27,12 +29,14 @@ namespace AdSetIntegrador.Presentation.Controllers
                     request = FilterMapper.ToRequest(listViewModel.Filter);
                 }
 
-                var response = useCase.Execute(request);
+                var vehicles = listVehicles.Execute(request);
+                var overview = getVehiclesOverview.Execute();
 
                 return View("Index", new ListViewModel
                 {
                     Filter = FilterMapper.ToFilter(request),
-                    Vehicles = VehicleMapper.VehiclesToListView(response)
+                    Overview = OverviewMapper.ToView(overview),
+                    Vehicles = VehicleMapper.VehiclesToListView(vehicles)
                 });
             }
             catch
@@ -76,7 +80,9 @@ namespace AdSetIntegrador.Presentation.Controllers
         public async Task<IActionResult> Register(
              VehicleModel vehicle,
              ICollection<IFormFile> imageFiles,
-             [FromServices] IRegisterVehicleUseCase useCase
+             [FromServices] IListVehiclesUseCase listVehicles,
+             [FromServices] IRegisterVehicleUseCase useCase,
+             [FromServices] IGetVehiclesOverviewUseCase getVehiclesOverview
         )
         {
             try
@@ -110,10 +116,8 @@ namespace AdSetIntegrador.Presentation.Controllers
                 }
                 return View(vehicle);
             }
-            catch (Exception ex) 
+            catch 
             {
-                System.Console.WriteLine("Erro aqui na view");
-                System.Console.WriteLine(ex.Message);
                 return View(vehicle);
             }
         }
