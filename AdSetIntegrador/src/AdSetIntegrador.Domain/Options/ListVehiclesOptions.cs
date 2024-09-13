@@ -1,8 +1,9 @@
 ﻿using AdSetIntegrador.Domain.Enums;
 
-namespace AdSetIntegrador.Communication.Requests;
+namespace AdSetIntegrador.Domain.Options;
 
-public class RequestListVehiclesDTO {
+public class ListVehiclesOptions
+{
     public string? Plate { get; set; }
     public string? Brand { get; set; }
     public string? Model { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using AdSetIntegrador.Domain.Entities;
 
 namespace AdSetIntegrador.Presentation.Models;
 
@@ -41,4 +42,8 @@ public class VehicleModel
     [Range(0, double.MaxValue, ErrorMessage = "O Preço deve ser maior ou igual a R$ 0,00")]
     [DisplayName("Preço")]
     public decimal Price { get; set; }
+
+    public ICollection<Image> Images { get; set; } = [];
+    public string? ImgBase64 { get; set; }
+    public string? ImgContentType { get; set; }
 }

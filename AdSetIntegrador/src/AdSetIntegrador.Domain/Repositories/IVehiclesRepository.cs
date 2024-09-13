@@ -1,5 +1,5 @@
-﻿using AdSetIntegrador.Communication.Requests;
-using AdSetIntegrador.Domain.Entities;
+﻿using AdSetIntegrador.Domain.Entities;
+using AdSetIntegrador.Domain.Options;
 
 namespace AdSetIntegrador.Domain.Repositories;
 
@@ -9,5 +9,5 @@ public interface IVehiclesRepository
     void Delete(Vehicle vehicle);
     void Save();
     Vehicle? GetById(int vehicleId);
-    List<Vehicle> List(RequestListVehiclesDTO request);
+    List<Vehicle> List(ListVehiclesOptions options);
 }

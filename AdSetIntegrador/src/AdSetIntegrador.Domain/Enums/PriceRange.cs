@@ -1,4 +1,4 @@
-﻿namespace AdSetIntegrador.Communication.Enums;
+﻿namespace AdSetIntegrador.Domain.Enums;
 
 public enum PriceRange
 {

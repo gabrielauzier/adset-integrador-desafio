@@ -1,9 +1,9 @@
-﻿using AdSetIntegrador.Communication.Requests;
-using AdSetIntegrador.Domain.Entities;
+﻿using AdSetIntegrador.Domain.Entities;
 using AdSetIntegrador.Domain.Repositories;
-using Microsoft.EntityFrameworkCore;
 using AdSetIntegrador.Infrastructure.Helpers;
-using AdSetIntegrador.Communication.Enums;
+using AdSetIntegrador.Domain.Options;
+using AdSetIntegrador.Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdSetIntegrador.Infrastructure.DataAccess.Repositories;
 
@@ -35,21 +35,25 @@ internal class VehiclesRepository : IVehiclesRepository
 
     public Vehicle? GetById(int vehicleId)
     {
-        return _dbContext.Vehicles.FirstOrDefault(v => v.Id == vehicleId);
+        return _dbContext.Vehicles.Include(v => v.Images).FirstOrDefault(v => v.Id == vehicleId);
     }
 
-    public List<Vehicle> List(RequestListVehiclesDTO request)
+    public List<Vehicle> List(ListVehiclesOptions options)
     {
         var result = _dbContext.Vehicles
-            .Filter(!String.IsNullOrEmpty(request.Plate), v => v.Plate.Contains(request.Plate ?? ""))
-            .Filter(!String.IsNullOrEmpty(request.Color), v => v.Color.Contains(request.Color ?? ""))
-            .Filter(!String.IsNullOrEmpty(request.Brand), v => v.Brand.Contains(request.Brand ?? ""))
-            .Filter(!String.IsNullOrEmpty(request.Model), v => v.Model.Contains(request.Model ?? ""))
-            .Filter(request.MinYear.HasValue, v => v.Year >= request.MinYear)
-            .Filter(request.MaxYear.HasValue, v => v.Year <= request.MaxYear)
-            .Filter(request.PriceRange == PriceRange.Low, v => v.Price >= 10 * 1000 && v.Price <= 50 * 1000)
-            .Filter(request.PriceRange == PriceRange.Medium, v => v.Price >= 50 * 1000 && v.Price <= 90 * 1000)
-            .Filter(request.PriceRange == PriceRange.High, v => v.Price >= 90 * 1000)
+            .Include(v => v.Images)
+            .Filter(!String.IsNullOrEmpty(options.Plate), v => v.Plate.Contains(options.Plate ?? ""))
+            .Filter(!String.IsNullOrEmpty(options.Color), v => v.Color.Contains(options.Color ?? ""))
+            .Filter(!String.IsNullOrEmpty(options.Brand), v => v.Brand.Contains(options.Brand ?? ""))
+            .Filter(!String.IsNullOrEmpty(options.Model), v => v.Model.Contains(options.Model ?? ""))
+            .Filter(options.MinYear.HasValue, v => v.Year >= options.MinYear)
+            .Filter(options.MaxYear.HasValue, v => v.Year <= options.MaxYear)
+            .Filter(options.PriceRange == PriceRange.Low, v => v.Price >= 10 * 1000 && v.Price <= 50 * 1000)
+            .Filter(options.PriceRange == PriceRange.Medium, v => v.Price >= 50 * 1000 && v.Price <= 90 * 1000)
+            .Filter(options.PriceRange == PriceRange.High, v => v.Price >= 90 * 1000)
+            .Filter(options.Photos == PhotosOption.WithPhotos, v => v.Images.Count() > 0)
+            .Filter(options.Photos == PhotosOption.NoPhotos, v => v.Images.Count() == 0)
+            
             .AsQueryable();
 
         /*

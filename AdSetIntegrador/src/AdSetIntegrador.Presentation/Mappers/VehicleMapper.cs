@@ -20,7 +20,7 @@ public static class VehicleMapper
         };
     }
 
-    public static RequestRegisterVehicleJson ToRegister(VehicleModel vehicle)
+    public static RequestRegisterVehicleJson ToRegister(VehicleModel vehicle, ICollection<Image>? images)
     {
         return new RequestRegisterVehicleJson
         {
@@ -30,11 +30,12 @@ public static class VehicleMapper
             Model = vehicle.Model,
             Plate = vehicle.Plate,
             Price = vehicle.Price,
-            Year = vehicle.Year
+            Year = vehicle.Year,
+            Images = images ?? []
         };
     }
 
-    public static RequestUpdateVehicleJson ToUpdate(VehicleModel vehicle)
+    public static RequestUpdateVehicleJson ToUpdate(VehicleModel vehicle, ICollection<Image>? images)
     {
         return new RequestUpdateVehicleJson
         {
@@ -46,22 +47,39 @@ public static class VehicleMapper
             Plate = vehicle.Plate,
             Price = vehicle.Price,
             Year = vehicle.Year,
+            Images = images ?? []
         };
     }
 
     public static List<VehicleModel> VehiclesToListView(List<Vehicle> vehicles)
     {
-        return vehicles.Select(vehicle => new VehicleModel
-         {
-             Brand = vehicle.Brand,
-             Color = vehicle.Color,
-             Id = vehicle.Id,
-             Mileage = vehicle.Mileage,
-             Model = vehicle.Model,
-             Plate = vehicle.Plate,
-             Price = vehicle.Price,
-             Year = vehicle.Year
-         }).ToList();
+
+        return vehicles.Select(vehicle =>
+        {
+            string imgBase64 = null;
+
+            var imgRaw = vehicle.Images.FirstOrDefault()?.Raw;
+            var contentType = vehicle.Images.FirstOrDefault()?.ContentType;
+
+            if (imgRaw != null)
+            {
+                imgBase64 = Convert.ToBase64String(imgRaw);
+            }
+
+            return new VehicleModel
+            {
+                Brand = vehicle.Brand,
+                Color = vehicle.Color,
+                Id = vehicle.Id,
+                Mileage = vehicle.Mileage,
+                Model = vehicle.Model,
+                Plate = vehicle.Plate,
+                Price = vehicle.Price,
+                Year = vehicle.Year,
+                ImgBase64 = imgBase64,
+                ImgContentType = contentType
+            };
+        }).ToList();
     }
 
     public static ListViewModel ToListView(List<Vehicle> vehicles)

@@ -1,4 +1,4 @@
-﻿using AdSetIntegrador.Communication.Enums;
+﻿using AdSetIntegrador.Domain.Enums;
 using AdSetIntegrador.Communication.Requests;
 using AdSetIntegrador.Presentation.Models;
 

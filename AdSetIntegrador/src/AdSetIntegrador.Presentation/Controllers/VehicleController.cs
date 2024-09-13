@@ -7,6 +7,7 @@ using AdSetIntegrador.Presentation.Models;
 using AdSetIntegrador.Presentation.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using AdSetIntegrador.Communication.Requests;
+using AdSetIntegrador.Domain.Entities;
 
 namespace AdSetIntegrador.Presentation.Controllers
 {
@@ -19,16 +20,12 @@ namespace AdSetIntegrador.Presentation.Controllers
         {
             try
             {
-                System.Console.WriteLine("AQUI 22222222");
-
                 var request = new RequestListVehiclesDTO();
 
                 if (listViewModel.Filter != null)
                 {
                     request = FilterMapper.ToRequest(listViewModel.Filter);
                 }
-
-                System.Console.WriteLine("Oia => " + request.Brand);
 
                 var response = useCase.Execute(request);
 
@@ -38,11 +35,8 @@ namespace AdSetIntegrador.Presentation.Controllers
                     Vehicles = VehicleMapper.VehiclesToListView(response)
                 });
             }
-            catch (Exception ex)
+            catch
             {
-                System.Console.WriteLine("Caiu aqui no erro, pae");
-                System.Console.WriteLine(ex.Message);
-                System.Console.WriteLine(ex.StackTrace);
                 return View("Index", listViewModel);
             };
         }
@@ -79,8 +73,9 @@ namespace AdSetIntegrador.Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(
+        public async Task<IActionResult> Register(
              VehicleModel vehicle,
+             ICollection<IFormFile> imageFiles,
              [FromServices] IRegisterVehicleUseCase useCase
         )
         {
@@ -88,20 +83,45 @@ namespace AdSetIntegrador.Presentation.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var response = useCase.Execute(VehicleMapper.ToRegister(vehicle));
+                    var imagesToUpload = new List<Image>();
+
+                    foreach (var imageFile in imageFiles)
+                    {
+                        if (imageFile.Length > 0)
+                        {
+                            using var memoryStream = new MemoryStream();
+                            await imageFile.CopyToAsync(memoryStream);
+                            var imageData = memoryStream.ToArray();
+
+                            var image = new Image
+                            {
+                                Name = imageFile.Name,
+                                ContentType = imageFile.ContentType,
+                                Raw = imageData,
+                                Description = "Foto de veículo"
+                            };
+
+                            imagesToUpload.Add(image);
+                        }
+                    }
+                
+                    var response = useCase.Execute(VehicleMapper.ToRegister(vehicle, imagesToUpload));
                     return RedirectToAction("Index");
                 }
                 return View(vehicle);
             }
-            catch
+            catch (Exception ex) 
             {
+                System.Console.WriteLine("Erro aqui na view");
+                System.Console.WriteLine(ex.Message);
                 return View(vehicle);
             }
         }
 
         [HttpPost]
-        public IActionResult Update(
+        public async Task<IActionResult> Update(
             VehicleModel vehicle,
+             ICollection<IFormFile> imageFiles,
             [FromServices] IUpdateVehicleUseCase useCase
         )
         {
@@ -109,14 +129,35 @@ namespace AdSetIntegrador.Presentation.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var response = useCase.Execute(VehicleMapper.ToUpdate(vehicle));
+                    var imagesToUpload = new List<Image>();
+
+                    foreach (var imageFile in imageFiles)
+                    {
+                        if (imageFile.Length > 0)
+                        {
+                            using var memoryStream = new MemoryStream();
+                            await imageFile.CopyToAsync(memoryStream);
+                            var imageData = memoryStream.ToArray();
+
+                            var image = new Image
+                            {
+                                Name = imageFile.Name,
+                                ContentType = imageFile.ContentType,
+                                Raw = imageData,
+                                Description = "Foto de veículo"
+                            };
+
+                            imagesToUpload.Add(image);
+                        }
+                    }
+
+                    var response = useCase.Execute(VehicleMapper.ToUpdate(vehicle, imagesToUpload));
                     return RedirectToAction("Index");
                 }
                 return View(vehicle);
             }
-            catch (Exception ex)
+            catch
             {
-                System.Console.WriteLine(ex.Message);
                 return View(vehicle);
             }
         }

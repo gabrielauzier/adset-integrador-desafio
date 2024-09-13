@@ -18,6 +18,7 @@ public static class DependencyInjectionExtension
     private static void AddRepositories(IServiceCollection services)
     {
         services.AddScoped<IVehiclesRepository, VehiclesRepository>();
+        services.AddScoped<IImagesRepository, ImagesRepository>();
     }
 
     private static void AddDbSqlServerContext(IServiceCollection services, IConfiguration configuration)

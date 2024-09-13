@@ -8,10 +8,12 @@ namespace AdSetIntegrador.Application.UseCases.Vehicles.Register;
 public class RegisterVehicleUseCase : IRegisterVehicleUseCase
 {
     private readonly IVehiclesRepository _vehiclesRepository;
+    private readonly IImagesRepository _imagesRepository;
 
-    public RegisterVehicleUseCase(IVehiclesRepository vehiclesRepository)
+    public RegisterVehicleUseCase(IVehiclesRepository vehiclesRepository, IImagesRepository imagesRepository)
     {
         _vehiclesRepository = vehiclesRepository;
+        _imagesRepository = imagesRepository;
     }
 
     public ResponseRegisterVehicleJson Execute(RequestRegisterVehicleJson request)
@@ -25,9 +27,23 @@ public class RegisterVehicleUseCase : IRegisterVehicleUseCase
             Plate = request.Plate,
             Price = request.Price,
             Year = request.Year,
+            
         };
-
         _vehiclesRepository.Create(vehicle);
+
+        foreach(var Image in request.Images)
+        {
+            _imagesRepository.Upload(new Image
+            {
+                Name = Image.Name,
+                Description = Image.Description,
+                ContentType = Image.ContentType,
+                Raw = Image.Raw,
+                VehicleId = vehicle.Id
+            });
+        }
+
+        _vehiclesRepository.Save();
 
         return new ResponseRegisterVehicleJson { Id = vehicle.Id };
     }
